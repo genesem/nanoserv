@@ -2,8 +2,8 @@ package main
 
 import ("io";"log";"net/http";"time";"os")
 
-const lPort = ":3000"
-const lDir  = "./"
+const lPort = ":3000" // tcp4 port to serve
+const lDir  = "."     // root directory, ex: "./web" for subdir with name 'web'
 
 const msg404 =`
 <html lang="en">
@@ -41,7 +41,7 @@ type logServer struct {
 func (l *logServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
    w.Header().Add("Server", "nanoServ")
-   fi, err := os.Stat("."+r.RequestURI)
+   fi, err := os.Stat(lDir+r.RequestURI)
 	if fi == nil && err != nil {
 		log.Printf("404: %s\n", r.RequestURI)  //"stat /does/not/exist: no such file or directory"
 		notFoundHandler(w, r)
