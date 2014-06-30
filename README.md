@@ -16,6 +16,7 @@ Nano http web server written in go lang.
 * `go build nanoserv.go && ./nanoserv`
 
 -----
-By default web server listens on :3000 tcp port.
 
-This can be changed altering line #5: const lPort = ":3000" to desired port.
+By default web server listen on :3000 tcp port.
+
+This can be changed altering the line #5: const lPort = ":3000" to desired port.
