@@ -15,6 +15,7 @@ Nano http web server written in go lang.
 * `wget https://raw.githubusercontent.com/genesem/nanoserv/master/nanoserv.go`
 * `go build nanoserv.go && ./nanoserv`
 
-
+-----
 By default web server listens on :3000 tcp port.
+
 This can be changed altering line #5: const lPort = ":3000" to desired port.
