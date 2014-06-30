@@ -7,7 +7,8 @@ Nano http web server written in go lang.
 
 * custom 404 error message
 * screen requests log
-* serve static files from the run directory
+* serve static files from the run directory but it is changeable
+* no third party dependencies only core go lang packages used
 
 
 ###Install:
