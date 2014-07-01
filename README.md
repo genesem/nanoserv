@@ -20,7 +20,7 @@ Nano http web server written in go lang.
 
 By default web server listen on :3000 tcp port.
 
-How to use custom port and web root: `./nanoserv -addr=3001 -root=/var/www`.
+How to use custom port and web root: `./nanoserv -addr=:3001 -root=/var/www`.
 
 Please don't use trailing slash in the `root` value, i.e. `-root=/var/www/` is incorrect.
 
