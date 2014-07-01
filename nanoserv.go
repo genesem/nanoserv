@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"io"
 	"log"
 	"net/http"
@@ -8,8 +9,13 @@ import (
 	"time"
 )
 
-const lPort = ":3000" // tcp4 port to serve
-const lDir = "."      // root directory, ex: "./web" for subdir with name 'web'
+//const lPort = ":3000" // tcp4 port to serve
+//const lDir = "."      // root directory, ex: "./web" for subdir with name 'web'
+
+var (
+	addr = flag.String("addr", ":3000", "tcp4 host and port to listen")
+	root = flag.String("root", ".", "root directory")
+)
 
 const msg404 = `
 <html lang="en">
@@ -46,7 +52,7 @@ type logServer struct {
 func (l *logServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Add("Server", "nanoServ")
-	fi, err := os.Stat(lDir + r.RequestURI)
+	fi, err := os.Stat(*root + r.RequestURI)
 	if fi == nil && err != nil {
 		log.Printf("404: %s\n", r.RequestURI) //"stat /does/not/exist: no such file or directory"
 		notFoundHandler(w, r)
@@ -58,9 +64,10 @@ func (l *logServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
+	flag.Parse()
 	srv := &http.Server{
-		Addr:           lPort,
-		Handler:        &logServer{hdl: http.FileServer(http.Dir(lDir))},
+		Addr:           *addr,
+		Handler:        &logServer{hdl: http.FileServer(http.Dir(*root))},
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 15,
