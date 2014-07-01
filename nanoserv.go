@@ -1,11 +1,17 @@
 package main
 
-import ("io";"log";"net/http";"time";"os")
+import (
+	"io"
+	"log"
+	"net/http"
+	"os"
+	"time"
+)
 
 const lPort = ":3000" // tcp4 port to serve
-const lDir  = "."     // root directory, ex: "./web" for subdir with name 'web'
+const lDir = "."      // root directory, ex: "./web" for subdir with name 'web'
 
-const msg404 =`
+const msg404 = `
 <html lang="en">
  <head>
   <meta charset="utf-8">
@@ -27,41 +33,39 @@ body {
   <br/><a href="/">go back</a></div>
 </body></html>`
 
-
 func notFoundHandler(w http.ResponseWriter, r *http.Request) {
-  w.Header().Set("Content-Type", "text/html; charset=utf-8")
-  w.WriteHeader(404)
-  io.WriteString(w, msg404)
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.WriteHeader(404)
+	io.WriteString(w, msg404)
 }
 
 type logServer struct {
-    hdl http.Handler
+	hdl http.Handler
 }
 
 func (l *logServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
-   w.Header().Add("Server", "nanoServ")
-   fi, err := os.Stat(lDir+r.RequestURI)
+	w.Header().Add("Server", "nanoServ")
+	fi, err := os.Stat(lDir + r.RequestURI)
 	if fi == nil && err != nil {
-		log.Printf("404: %s\n", r.RequestURI)  //"stat /does/not/exist: no such file or directory"
+		log.Printf("404: %s\n", r.RequestURI) //"stat /does/not/exist: no such file or directory"
 		notFoundHandler(w, r)
 		return
-		}
-   log.Println(r.Method, r.RequestURI)
-   l.hdl.ServeHTTP(w, r)
+	}
+	log.Println(r.Method, r.RequestURI)
+	l.hdl.ServeHTTP(w, r)
 }
-
 
 func main() {
 
 	srv := &http.Server{
 		Addr:           lPort,
-		Handler: &logServer{ hdl: http.FileServer(http.Dir(lDir)) },
+		Handler:        &logServer{hdl: http.FileServer(http.Dir(lDir))},
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 15,
 	}
 
-       	log.Printf("webServer started at %v\n\n", srv.Addr)
+	log.Printf("webServer started at %v\n\n", srv.Addr)
 	log.Fatal(srv.ListenAndServe())
 }
