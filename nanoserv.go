@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-var root string
+var root string // root directory
 
 const msg404 = `
 <html lang="en">
@@ -56,11 +56,18 @@ func (l *logServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	l.hdl.ServeHTTP(w, r)
 }
 
+func init() {
+	const (
+		defRoot = "."
+		usage   = "root directory"
+	)
+	flag.StringVar(&root, "root", defRoot, usage)
+	flag.StringVar(&root, "r", defRoot, usage+" (shorthand)")
+}
+
 func main() {
 
 	addr := flag.String("addr", ":3000", "tcp4 host and port to listen")
-
-	flag.StringVar(&root, "root", ".", "root directory")
 	flag.Parse()
 
 	srv := &http.Server{
