@@ -71,6 +71,6 @@ func main() {
 		MaxHeaderBytes: 1 << 15,
 	}
 
-	log.Printf("webServer started at %v\n\n", srv.Addr)
+	log.Printf("webServer started at %v with root=%v\n\n", srv.Addr, root)
 	log.Fatal(srv.ListenAndServe())
 }
