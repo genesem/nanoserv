@@ -6,14 +6,14 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path"
 	"time"
 )
 
 var root string // root directory
 
 const (
-	sign = "nanoServ"
-
+	sign   = "nanoServ"
 	msg404 = `
 <html lang="en">
  <head>
@@ -73,6 +73,7 @@ func main() {
 
 	addr := flag.String("addr", ":3000", "tcp4 host and port to listen")
 	flag.Parse()
+	root = path.Clean(root)
 
 	srv := &http.Server{
 		Addr:           *addr,
