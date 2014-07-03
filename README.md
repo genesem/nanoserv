@@ -3,6 +3,8 @@ nanoserv
 
 Nano http web server written in go lang.
 
+[![Build Status](https://travis-ci.org/genesem/nanoserv.svg?branch=master)](https://travis-ci.org/genesem/nanoserv)
+
 ###Features:
 
 * custom 404 error message
