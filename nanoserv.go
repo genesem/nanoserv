@@ -70,8 +70,16 @@ func init() {
 }
 
 func main() {
+	port := os.Getenv("PORT")
 
-	addr := flag.String("addr", ":3000", "tcp4 host and port to listen")
+	if port == "" {
+		port = ":3000"
+
+	} else {
+		port = ":" + port
+	}
+
+	addr := flag.String("addr", port, "tcp4 host and port to listen")
 	flag.Parse()
 	root = path.Clean(root)
 
