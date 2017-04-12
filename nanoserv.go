@@ -50,9 +50,13 @@ type logServer struct {
 func (l *logServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Add("Server", sign)
-	fi, err := os.Stat(root + r.RequestURI)
+
+	rq := r.URL.Path
+
+	fi, err := os.Stat(root + rq)
 	if fi == nil && err != nil {
-		log.Printf("404: %s\n", r.RequestURI) //"stat /does/not/exist: no such file or directory"
+
+		log.Printf("404: %s\n", rq) //does not exist
 		notFoundHandler(w, r)
 		return
 	}

@@ -20,8 +20,9 @@ _cgo_export.*
 
 _testmain.go
 makefile
-.gitignore
 
+
+*.cmd
 *.exe
 *.test
 *.txt
