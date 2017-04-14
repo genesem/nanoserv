@@ -31,7 +31,7 @@ Use `./nanoserv -h` for help with flags.
 
 #### Note:
 
-Nanoserv is now using `os.LookupEnv("PORT")` instead of os.Getenv("PORT"),
+Nanoserv is now using `os.LookupEnv("PORT")` instead of `os.Getenv("PORT")`,
 
 so the minimum version of the Go compiler required is Go 1.5.
 
