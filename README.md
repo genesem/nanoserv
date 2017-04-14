@@ -29,11 +29,13 @@ Please don't use trailing slash in the `root` value, i.e. `-root=/var/www/` is i
 
 Use `./nanoserv -h` for help with flags.
 
-#### Note:
+#### Content Caching:
+
+Content caching is *disabled*, i.e. server is sending http header:
+    `Cache-Control: no-cache, no-store, must-revalidate`
+
+#### Notes:
 
 Nanoserv is now using `os.LookupEnv("PORT")` instead of `os.Getenv("PORT")`,
 
-so the minimum version of the Go compiler required is Go 1.5.
-
-
-
+so the minimum version of the Go compiler required is *Go 1.5*

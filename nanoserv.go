@@ -50,6 +50,7 @@ type logServer struct {
 func (l *logServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Add("Server", sign)
+	w.Header().Add("Cache-Control", "no-cache, no-store, must-revalidate") // disable cache
 
 	var rq = r.URL.Path
 	if _, err := os.Stat(root + rq); os.IsNotExist(err) {
