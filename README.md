@@ -1,9 +1,8 @@
-nanoserv
+nanoserv [![Build Status](https://travis-ci.org/genesem/nanoserv.svg?branch=master)](https://travis-ci.org/genesem/nanoserv)
 ========
 
 Nano http web server written in go lang.
 
-[![Build Status](https://travis-ci.org/genesem/nanoserv.svg?branch=master)](https://travis-ci.org/genesem/nanoserv)
 
 #### Features:
 
@@ -11,8 +10,8 @@ Nano http web server written in go lang.
 * screen requests log.
 * serve static files from the run directory but it is changeable.
 * no third party dependencies, only core golang packages used.
-* live reload software compatible, i.e. nanoserv respects `PORT` environment variable.
-  example: [gin](https://github.com/codegangsta/gin)
+* live reload software compatible, i.e. nanoserv respects `PORT` environment variable
+  (example: [gin](https://github.com/codegangsta/gin)).
 
 
 #### Install:
