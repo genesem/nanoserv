@@ -5,7 +5,7 @@ Nano http web server written in go lang.
 
 [![Build Status](https://travis-ci.org/genesem/nanoserv.svg?branch=master)](https://travis-ci.org/genesem/nanoserv)
 
-###Features:
+####Features:
 
 * custom 404 error message
 * screen requests log
@@ -13,13 +13,13 @@ Nano http web server written in go lang.
 * no third party dependencies only core go lang packages used
 
 
-###Install:
+####Install:
 
   `wget https://raw.githubusercontent.com/genesem/nanoserv/master/nanoserv.go`
 
   `go build nanoserv.go && ./nanoserv`
 
-###Usage:
+####Usage:
 
 By default web server listen on :3000 tcp port.
 
