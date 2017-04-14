@@ -71,10 +71,11 @@ func main() {
 	addr := flag.String("addr", ":"+port, "tcp4 host and port to listen, exampe: nanoserv -addr=\":9000\"")
 	flag.StringVar(&root, "root", ".", "root directory, exampe: nanoserv -root=\"/var/www\"")
 	flag.Parse()
+	root = path.Clean(root)
 
 	srv := &http.Server{
 		Addr:           *addr,
-		Handler:        &logServer{hdl: http.FileServer(http.Dir(path.Clean(root)))},
+		Handler:        &logServer{hdl: http.FileServer(http.Dir(root))},
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 15,
