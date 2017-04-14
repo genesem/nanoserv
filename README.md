@@ -10,7 +10,8 @@ Nano http web server written in go lang.
 * custom 404 error message
 * screen requests log
 * serve static files from the run directory but it is changeable
-* no third party dependencies only core go lang packages used
+* no third party dependencies, only core golang packages used
+* live reload software compatible, i.e. nanoservs respects `PORT` environment variable.
 
 
 #### Install:
