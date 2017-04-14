@@ -14,21 +14,19 @@ var root string // root directory
 
 const (
 	sign   = "nanoServ"
-	msg404 = `
-<html lang="en">
-<head>
+	msg404 = `<html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>404 - not found</title>
 <style>
 * { padding:0; margin:0; }
-html { background-color:#fafaf0;}
+html { background-color:#ffa;}
 body { font-family: Helvetica, Arial, Verdana; color:#222222; line-height:1.5em;}
+div {padding: 4em;}
 </style>
 </head><body>
-  <div style="padding:40px;"> 
-  <h2>404 - not found</h2><hr size="1" width="30%"/>
-  <br/><a href="/">go back</a></div>
+<div><h2>404 - not found</h2><hr width="30%"/>
+<br/><a href="/">go back</a></div>
 </body></html>`
 )
 
