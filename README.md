@@ -12,6 +12,7 @@ Nano http web server written in go lang.
 * serve static files from the run directory but it is changeable.
 * no third party dependencies, only core golang packages used.
 * live reload software compatible, i.e. nanoserv respects `PORT` environment variable.
+  example: [gin](https://github.com/codegangsta/gin)
 
 
 #### Install:
