@@ -30,7 +30,7 @@ Use `./nanoserv -h` for help with flags.
 
 #### Content Caching:
 
-Content caching is *disabled*, i.e. server is sending http header:
+Client side content caching is *disabled*, i.e. server is sending http header:
     `Cache-Control: no-cache, no-store, must-revalidate`
 
 #### Notes:
