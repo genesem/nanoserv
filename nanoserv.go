@@ -23,7 +23,7 @@ const (
    <style>
 	* { padding:0; margin:0; }
 	html {
-	    -webkit-font-smoothing: antialiased;
+	    font-smoothing: antialiased;
 	    background-color:#fafaf0;}
 	body {
 	    font-family: Helvetica, Arial, Verdana;
@@ -51,12 +51,10 @@ func (l *logServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Add("Server", sign)
 
-	rq := r.URL.Path
+	var rq = r.URL.Path
+	if _, err := os.Stat(root + rq); os.IsNotExist(err) {
 
-	fi, err := os.Stat(root + rq)
-	if fi == nil && err != nil {
-
-		log.Printf("404: %s\n", rq) //does not exist
+		log.Printf("404: %s\n", rq) //"stat /does/not/exist: no such file or directory"
 		notFoundHandler(w, r)
 		return
 	}
@@ -64,32 +62,19 @@ func (l *logServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	l.hdl.ServeHTTP(w, r)
 }
 
-func init() {
-	const (
-		defRoot = "."
-		usage   = "root directory"
-	)
-	flag.StringVar(&root, "root", defRoot, usage)
-	flag.StringVar(&root, "r", defRoot, usage+" (shorthand)")
-}
-
 func main() {
-	port := os.Getenv("PORT")
-
-	if port == "" {
-		port = ":3000"
-
-	} else {
-		port = ":" + port
+	port, ok := os.LookupEnv("PORT")
+	if !ok {
+		port = "3000"
 	}
 
-	addr := flag.String("addr", port, "tcp4 host and port to listen")
+	addr := flag.String("addr", ":"+port, "tcp4 host and port to listen, exampe: nanoserv -addr=\":9000\"")
+	flag.StringVar(&root, "root", ".", "root directory, exampe: nanoserv -root=\"/var/www\"")
 	flag.Parse()
-	root = path.Clean(root)
 
 	srv := &http.Server{
 		Addr:           *addr,
-		Handler:        &logServer{hdl: http.FileServer(http.Dir(root))},
+		Handler:        &logServer{hdl: http.FileServer(http.Dir(path.Clean(root)))},
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 15,

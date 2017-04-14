@@ -15,8 +15,8 @@ Nano http web server written in go lang.
 
 ###Install:
 
-* `wget https://raw.githubusercontent.com/genesem/nanoserv/master/nanoserv.go`
-* `go build nanoserv.go && ./nanoserv`
+  `wget https://raw.githubusercontent.com/genesem/nanoserv/master/nanoserv.go`
+  `go build nanoserv.go && ./nanoserv`
 
 ###Usage:
 
