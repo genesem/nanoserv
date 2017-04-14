@@ -52,10 +52,9 @@ func (l *logServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Server", sign)
 	w.Header().Add("Cache-Control", "no-cache, no-store, must-revalidate") // disable cache
 
-	var rq = r.URL.Path
-	if _, err := os.Stat(root + rq); os.IsNotExist(err) {
+	if _, err := os.Stat(root + r.URL.Path); os.IsNotExist(err) {
 
-		log.Printf("404: %s\n", rq) //"stat /does/not/exist: no such file or directory"
+		log.Printf("404: %s\n", r.URL.Path) // does/not/exist
 		notFoundHandler(w, r)
 		return
 	}
