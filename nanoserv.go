@@ -73,7 +73,9 @@ func main() {
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 15,
 	}
-
+	log.SetPrefix(sign + ": ")
+	log.SetFlags(1) // Ldate
 	log.Printf("webServer started at %v with root=%v\n\n", srv.Addr, root)
+	log.SetFlags(1<<1 | 1<<2) // Ltime|Lmicroseconds
 	log.Fatal(srv.ListenAndServe())
 }
